@@ -5,7 +5,7 @@
         "builtInPolicyDefinitions": {
             "value": [
                 {
-                    "policyDefinitionName": "Audit VMs that do not use managed disks",
+                    "policyDefinitionName": "06a78e20-9358-41c9-923c-fb736d382a4d",
                     "parameters": {
                         "{parameterName}": {
                             "value": "{parameterValue}"
