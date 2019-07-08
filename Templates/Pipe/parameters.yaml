@@ -1,7 +1,7 @@
 name: $(Build.DefinitionName)-$(SourceBranchName)-$(Date:yyyyMMdd).$(Rev:rr)
 
 variables:
-  RepoName: {your-repo-name}
+  RepoName: PolicyPipelines
   FolderPath: parameters #change it you didn't follow our suggested path
   ArtifactName: parameters
 
