@@ -10,7 +10,7 @@
             "type": "Microsoft.Authorization/policyDefinitions",
             "apiVersion": "2018-05-01",
             "properties": {
-                "displayName": "Deny Http Traffic",
+                "displayName": "Deny Http Traffic - Stroage Account",
                 "description": "deny deploying Storage Accounts allowing HTTP traffic",
                 "mode": "All",
                 "policyType": "Custom",

@@ -1,9 +1,13 @@
-# Deploy a Policy Definition via ARM Template
-$pathToARMTemplate = "policy-denyHttp.json"
+# Deploy Assignments via ARM Template
+# Assign to Resource Group for Tests
+$rgName = "policyRG"
+$pathToARMTemplate = "Templates\Assignments\resourceGroup.json"
+$pathToARMTemplateParameters = "Parameters\lab02-rgAssignments.json"
 
-$policyDefinitionAzDeploymentParams = @{
-    TemplateFile = (Get-Item $pathToARMTemplate).FullName
-    Name         = "policyDeployment-" + (Get-Date -Format FileDateTimeUniversal)
-    Location     = "westeurope"
+$assignmentAzDeploymentParams = @{
+    ResourceGroupName     = $rgName
+    TemplateFile          = (Get-Item $pathToARMTemplate).FullName
+    TemplateParameterFile = (Get-Item $pathToARMTemplateParameters).FullName
+    Name                  = "policyAssingments-" + (Get-Date -Format FileDateTimeUniversal)
 }
-New-AzDeployment @policyDefinitionAzDeploymentParams
+New-AzResourceGroupDeployment @assignmentAzDeploymentParams
