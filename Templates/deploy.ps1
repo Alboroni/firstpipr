@@ -1,5 +1,5 @@
 # Deploy a Policy Definition via ARM Template
-$pathToARMTemplate = "policy-denyHttp.json"
+$pathToARMTemplate = "storageaccount\policy-denyHttp.json"
 
 $policyDefinitionAzDeploymentParams = @{
     TemplateFile = (Get-Item $pathToARMTemplate).FullName
