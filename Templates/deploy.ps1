@@ -1,13 +1,30 @@
-# Deploy Assignments via ARM Template
-# Assign to Resource Group for Tests
-$rgName = "policyRG"
-$pathToARMTemplate = "Templates\Assignments\resourceGroup.json"
-$pathToARMTemplateParameters = "Parameters\lab02-rgAssignments.json"
+$rgName = "testtag"
+$storageAccountARMTemplate = "StorageAccount\deploy.json"
+$uncompliantStorageAccountARMTemplateParameters = "Parameters\lab02-HTTP.storage.json"
+$compliantStorageAccountARMTemplateParameters = "Parameters\lab02-HTTPS.storage.json"
 
-$assignmentAzDeploymentParams = @{
+# Deploy Uncompliant Storage Account (HTTP traffic allowed)
+$httpStorageAccountAzDeploymentParams = @{
     ResourceGroupName     = $rgName
-    TemplateFile          = (Get-Item $pathToARMTemplate).FullName
-    TemplateParameterFile = (Get-Item $pathToARMTemplateParameters).FullName
-    Name                  = "policyAssingments-" + (Get-Date -Format FileDateTimeUniversal)
+    TemplateFile          = $storageAccountARMTemplate
+    TemplateParameterFile = (Get-Item $uncompliantStorageAccountARMTemplateParameters).FullName
+    Name                  = "storageAccount-" + (Get-Date -Format FileDateTimeUniversal)
+    ErrorAction           = "SilentlyContinue"
+    ErrorVariable         = "saDeploymentError"
 }
-New-AzResourceGroupDeployment @assignmentAzDeploymentParams
+Write-Output "Deploying HTTP Storage Account"
+New-AzResourceGroupDeployment @httpStorageAccountAzDeploymentParams | Out-Null
+if ($saDeploymentError) {
+    Write-Output "Error during Storage Account deployment"
+    $saDeploymentError.Exception
+}
+
+# Deploy Compliant Storage Account (HTTP traffic disallowed)
+$httpsStorageAccounttAzDeploymentParams = @{
+    ResourceGroupName     = $rgName
+    TemplateFile          = (Get-Item $storageAccountARMTemplate).FullName
+    TemplateParameterFile = (Get-Item $compliantStorageAccountARMTemplateParameters).FullName
+    Name                  = "storageAccount-" + (Get-Date -Format FileDateTimeUniversal)
+}
+Write-Output "Deploying HTTPS Storage Account"
+New-AzResourceGroupDeployment @httpsStorageAccounttAzDeploymentParams | Out-Null
