@@ -7,7 +7,7 @@
                 {
                     "policyDefinitionName": "06a78e20-9358-41c9-923c-fb736d382a4d",
                     "parameters": { },
-                    "assignmentDisplayName": "Audit VMs that do not use managed disks",
+                    "assignmentDisplayName": "Audit VMs that do not use managed disks again",
                     "managedIdentity": false
                 }
             ]
